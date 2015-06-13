@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>Leet speak is alternative alphabet for the English lanauage used on the Internet. Here is a Leespeak translator </p>
+
+<div id = "container">
+<textarea id = "normalSentence" cols="50" rows="10"></textarea>
+<br>
+<button onclick ="convertext()">Convert</button>
+<br> 
+<div id ="leetSentence"></div>
+</div>
+
+
+<script type="text/javascript">
+function convertext() {
+	var normalSentence = document.getElementById("normalSentence").value;
+	var leetSentence = "";
+
+
+	for (var i = 0; i < normalSentence.length; i++) {
+		switch(normalSentence[i]) {
+			case 'a':
+			case 'A':
+			leetSentence += N
+
+			case 'b':
+			case 'B':
+			leeSentence += O
+
+			case 'c':
+			case 'C'
+			leetSentence += 
+
+			default:
+			leetSentence += normalSentence[i];
+
+		}
+	};
+	document.getElementById('leetSentence').innerHTML = leetSentence;
+}
+
+
+
+</script>
+</body>
+</html>

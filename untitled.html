@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+button pop up to say save file, or delete it, when hit save call the canvas by ID and move it into 
+file, 
+when they don't want to save then empty the canvas 
+<style>
+        video { border: 1px solid #ccc; display: block; margin: 0 0 20px 0; }
+        #canvas { margin-top: 20px; border: 1px solid #ccc; display: block; }
+</style>
+</head>
+<body>
+    <video id="video" width="640" height="480" autoplay></video>
+    
+    <button id="snap" class="sexyButton" onclick="myFunction()">Snap Photo</button>
+
+    <input type="button" id="Retake" value="Retake">
+
+    <canvas id="canvas" onclick ="" width="640" height="480"></canvas>
+
+    <a id = "download">Download Image</a>
+    <script>
+
+        // Put event listeners into place
+        window.addEventListener("DOMContentLoaded", function() {
+            // Grab elements, create settings, etc.
+            var canvas = document.getElementById("canvas"),
+                context = canvas.getContext("2d"),
+                video = document.getElementById("video"),
+                videoObj = { "video": true },
+                errBack = function(error) {
+                    console.log("Video capture error: ", error.code); 
+                };
+
+            // Put video listeners into place
+            if(navigator.getUserMedia) { // Standard
+                navigator.getUserMedia(videoObj, function(stream) {
+                    video.src = stream;
+                    video.play();
+                }, errBack);
+            } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+                navigator.webkitGetUserMedia(videoObj, function(stream){
+                    video.src = window.webkitURL.createObjectURL(stream);
+                    video.play();
+                }, errBack);
+            } else if(navigator.mozGetUserMedia) { // WebKit-prefixed
+                navigator.mozGetUserMedia(videoObj, function(stream){
+                    video.src = window.URL.createObjectURL(stream);
+                    video.play();
+                }, errBack);
+            }
+
+            // Trigger photo take
+            document.getElementById("snap").addEventListener("click", function() {
+                context.drawImage(video, 0, 0, 640, 480);
+            });
+        }, false);
+    </script>
+
+<script>
+// Erase the content within the Canvas
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+document.getElementById('Retake').addEventListener('click', function() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }, false);
+</script>
+
+ 
+<script> 
+function downloadCanvas(link, canvasID, filename) {
+    link.href = document.getElementById(canvasID).toDataURL();
+    link.download = filename;
+}
+
+document.getElementById("download").addEventListener('click', function () {
+    downloadCanvas(this, 'canvas', 'blah.png');
+}, false);
+
+
+// when button . clicked
+/* function move()  {
+    var canvas = document.getElementById("canvas");
+    var img = canvas.toDataURL("image/png')"
+}
+function myFunction() {
+    document.getElementById("demo").innerHTML = "Hello World";
+} */ 
+</script> 
+<div> <button onclick ="to_image()">Download</button></div>
+        
+</body>
+</html>
